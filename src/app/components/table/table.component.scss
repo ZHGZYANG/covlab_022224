@@ -1,0 +1,30 @@
+td, th{
+    text-align: center;
+    
+}
+table {
+    box-shadow: none;
+}
+th.mat-header-cell {
+    text-align: center;
+}
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: red !important;
+}
+
+.first-row {
+    font-weight: bold;
+    font-size: 1000;
+    background-color: #F1F1F1;
+    padding-left: 12px;
+  }
+  
+.tableContainer {
+    width: 80%;
+}
+
+@media screen and (max-width: 799px) {
+    .tableContainer {
+        width: 100%;
+    }
+}

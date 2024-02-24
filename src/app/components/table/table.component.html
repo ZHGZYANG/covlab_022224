@@ -1,0 +1,67 @@
+<div class="tableContainer" [ngStyle]="{'min-height':'150px','text-align':'center'}" style="display: flex; flex-flow:column; justify-content: space-evenly; margin: auto; align-items: center;">
+
+  <img src="../../../assets/images/loading.gif" [ngStyle]="{'display': isLoading && didDataLoad ? 'block': 'none','margin':'auto'}">
+    <p [ngStyle]="{'display': !didDataLoad ? 'block': 'none','margin':'auto','text-align':'center'}">Failed to load</p>
+    <h2>State Trends</h2>
+  <table style="width: 100%; margin-bottom:20px;" mat-table [dataSource]="dataSource" class="mat-elevation-z8" [ngStyle]="{'display': !isLoading ? 'table': 'none', 'flex-flow':'column'}">
+      
+    <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef>State</th>
+        <td style="font-size:20px" mat-cell *matCellDef="let element"> {{ element.state }} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="weeklyAverage">
+        <th mat-header-cell *matHeaderCellDef>Weekly Average</th>
+        <td style="font-size:20px" mat-cell *matCellDef="let element"> {{ element.cases_7_sum }} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="weeklyNewCasesPer1k">
+        <th mat-header-cell *matHeaderCellDef>Weekly Cases Per 10m</th>
+        <td style="font-size:20px" mat-cell *matCellDef="let element" > 
+          <div *ngIf="element.weekly_new_cases_per10m != 'N/A'">
+            {{ element.weekly_new_cases_per10m | number:'1.3-3'}}
+          </div>
+          <div *ngIf="element.weekly_new_cases_per10m == 'N/A'">
+            {{"N/A"}}
+          </div>
+        </td>
+
+      </ng-container>
+    
+      <ng-container matColumnDef="twoWeekChange">
+
+        <th class="tableHeaders" mat-header-cell *matHeaderCellDef>Two Week Change (%)</th>
+        <td style="font-size:20px" mat-cell *matCellDef="let element; let i = index" style="display: flex; flex-flow: column;">
+          <!-- <app-map></app-map> -->
+          <!-- <canvas id="myChart"></canvas> -->
+          <p *ngIf="element.cases_14_days_change.percentage !== 'N/A'" style="line-height: 14px; margin: 5px 0 0 0;">{{element.cases_14_days_change.percentage | number}}%</p>
+          <p *ngIf="element.cases_14_days_change.percentage == 'N/A'" style="line-height: 14px; margin: 5px 0 0 0;">N/A</p>
+          
+
+          <app-table-graph [index] = "i" [twoWeekChange]="element.cases_14_days_change ">
+          </app-table-graph>
+
+
+
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="testPositivity">
+        <th mat-header-cell *matHeaderCellDef>Test Positivity</th>
+        <td style="font-size:20px" mat-cell *matCellDef="let element">
+          <div *ngIf="element.positivity != 'N/A'">
+           {{element.positivity| number:'1.3-3'}} 
+          </div>
+          <div *ngIf="element.positivity == 'N/A'">
+            {{"N/A"}} 
+           </div>
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="columndefs"></tr>
+      <tr mat-row *matRowDef="let row; columns: columndefs; let i = index" [ngClass]="{'first-row': i === 0 && paginator.pageIndex === 0}"></tr>
+    
+  </table>
+  <mat-paginator #paginator style="color: black;" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+  <br>
+</div> 

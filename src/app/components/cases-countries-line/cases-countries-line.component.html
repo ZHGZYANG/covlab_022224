@@ -1,0 +1,32 @@
+<div [ngStyle]="{'min-height':'150px','text-align':'center'}" style="display: flex; flex-flow:column; justify-content: space-evenly; margin: auto; align-items: center;">
+<img src="../../../assets/images/loading.gif" [ngStyle]="{'display': isDataLoading && didDataLoad ? 'block': 'none','margin':'auto'}">
+<p [ngStyle]="{'display': !didDataLoad ? 'block': 'none','margin':'auto'}">Failed to load</p>
+
+    <div [ngStyle]="{'display': isDataLoading? 'none': 'block'}" style="margin-left: auto; width: 100%; text-align: center;">
+        <div id="selector">
+            <div class="container">
+                <h2 class="title" style="margin: 5px;">Real Cases and Predicted Cases</h2>
+                <mat-form-field class="filterTab" appearance="fill">
+                    <mat-label style="color: black">Select Filter</mat-label>
+                    <!-- <mat-select multiple disableRipple (selectionChange)="updateDatasets($event.value)" aria-label="Select"> -->
+                    <mat-select disableRipple (selectionChange)="updateDatasets($event.value)" aria-label="Select" [(value)]="selected">
+                        <mat-option style="color: black" name="option" value="dailyData" selected>Daily</mat-option>
+                        <mat-option style="color: black" name="option" value="7dayAvg">7 Day Average</mat-option>
+                        <mat-option style="color: black" name="option" value="14dayAvg">14 Day Average</mat-option>
+                        <mat-option style="color: black" name="option" value="cumulative">Cumulative</mat-option>
+                        <mat-option style="color: black" name="option" value="tweetPositivity">Tweet Positivity</mat-option>
+
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+        <div [ngStyle]="{'display': isDataLoading ? 'none': 'block'}" ngClass="graph" id="chartContainer" style="overflow: visible !important; "></div>
+        <div [ngStyle]="{'display': isDataLoading ? 'none': 'flex','flex-flow':'row','justify-content':'center'}">
+            <ngx-slider class="custom-slider" [value]="minValue" [highValue]="maxValue" [options]="options" (userChange)="updateData($event)" ></ngx-slider>
+        </div>
+    </div>
+
+    
+    
+</div>
+

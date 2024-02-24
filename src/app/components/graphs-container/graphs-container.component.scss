@@ -1,0 +1,29 @@
+.graphSize {
+    min-height: 100px;
+    @media screen and (min-width: 1300px) {
+        margin:auto;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .graphCard {
+        margin:auto;
+        padding: 0;
+    }
+}
+@media screen and (min-width: 600px) {
+    .graphCard {
+        width:95%; margin:auto;
+    }
+}
+
+.red-snackbar .mat-simple-snackbar {
+    color: red !important;
+  }
+  
+  .red-snackbar .mat-simple-snackbar-action {
+    color: red !important;
+
+  }
+  

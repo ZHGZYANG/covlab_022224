@@ -1,0 +1,101 @@
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<div class="backgroundCss">
+    <app-nav-bar style="width: 100%;"></app-nav-bar>
+    <div class="background-overlay">
+        <div class="titleContainer" *ngIf="!isLoading" [@slideInOut]>
+            <p class="Covlab" style="padding-top: 15px;">Covlab</p>
+            <p class="hook">Uncover the connection: Explore COVID-19 cases through tweets.</p>
+            <div>
+                <div style="display: flex; flex-flow: row; width: 100%; justify-content: center; gap: 15px;">
+                    <div *ngIf="!isLoading" >
+                        <p class="dataTitle">Total Tweets</p>
+                        <h4 >{{totalTweets | shortNumber}}</h4>
+                    </div >
+                    <div *ngIf="!isLoading" >
+                        <p class="dataTitle" >Model Positive Tweets</p>
+                        <h4 >{{modelPosTweets | shortNumber}}</h4>
+                    </div>
+                    <!-- <div *ngIf="!isLoading" > -->
+                        <!-- <p class="dataTitle">Cases 14-day Avg</p> -->
+                        <!-- <h4 >{{cases14Change | shortNumber}}</h4> -->
+                    <!-- </div> -->
+
+                </div>
+                <p class="lastUpdated" *ngIf="!isLoading" [@slideInOut]>{{updatedString}}</p>
+            </div>
+        </div>
+    
+    </div>
+</div>
+<!-- Preview -->
+<div class="previewContainer">
+    <br>
+    <mat-card class="mat-elevation-z8" style="background-color: gray; width:95%; margin:auto; padding: 5px; ">
+        <div class="infoWrapper">
+            <div class="description" >
+                <p style="color: white;  text-align: center;">Based on manual-labeled tweets, we trained a Natural Language Processing (NLP) model to select the description of the self-reported covid positive tweets. The comparison with real daily cases has shown in the graph.</p>
+            </div>
+            <div class="imgContainer">
+                <img id="graphImage" (click)="goToApp()" src="../../../assets/images/line-graph.jpg">
+                <!-- <img (click)="goToApp()" class="externalLink" src="../../../assets/images/externalLink.png" alt=""> -->
+            </div>   
+        </div>
+    </mat-card>
+    <br>
+    <mat-card class="mat-elevation-z8" style="background-color: gray; width:95%; margin:auto; padding: 5px; ">
+        <div class="infoWrapper" id="secondCard">
+            <div class="description" >
+                <p style="color: white; ">The pie chart shows the total collected tweets sum, model predicted positive percentage and the current labelling status percentage.</p>
+            </div> 
+            <div class="imgContainer">
+               <img id="graphImage" (click)="goToApp()" src="../../../assets/images/pieChart.jpg">
+               <!-- <img (click)="goToApp()" class="externalLink" src="../../../assets/images/externalLink.png" alt=""> -->
+
+            </div>   
+               
+        </div>
+    </mat-card>
+    <br>
+    <mat-card class="mat-elevation-z8" style="background-color: gray; width:95%; margin:auto; padding: 5px;">
+        <div class="infoWrapper">
+            <div class="description">
+                <p style="text-align: center;">The US map shows the model predicted positive cases distribution of each state. Users can move cursor to each state to check the details. The darker color means the more people infected in that state.</p>
+            </div>  
+            <div  class="imgContainer">
+                <img id="graphImage" (click)="goToMap()" src="../../../assets/images/usMap.jpg">
+                <!-- <img (click)="goToMap()" class="externalLink" src="../../../assets/images/externalLink.png" alt=""> -->
+
+            </div>    
+        </div>
+    </mat-card>
+    <br>
+    <mat-card class="mat-elevation-z8" style="background-color: gray; width:95%; margin:auto; padding: 5px;">
+        <div class="infoWrapper" id="secondCard">
+            <div class="description">
+                <p style="text-align: center;">Counting the proportions of symptoms, and discovering unrecognized new symptoms.</p>
+            </div>  
+            <div  class="imgContainer">
+                <img id="graphImage" (click)="goToApp()" src="../../../assets/images/symptoms.png">
+                <!-- <img (click)="goToMap()" class="externalLink" src="../../../assets/images/externalLink.png" alt=""> -->
+
+            </div>    
+        </div>
+    </mat-card>
+    <br>
+    <mat-card class="mat-elevation-z8" style="background-color: gray; width:95%; margin:auto; padding: 5px;">
+        <div class="infoWrapper">
+            <div class="description">
+                <p style="text-align: center;">Track the new cases by state over a 14-day period. Top 10 symtpoms mentioned by self-reported positive patients.</p>
+            </div>  
+            <div  class="imgContainer">
+                <img id="graphImage" (click)="goToApp()" src="../../../assets/images/statetrends.png">
+                <!-- <img (click)="goToMap()" class="externalLink" src="../../../assets/images/externalLink.png" alt=""> -->
+
+            </div>    
+        </div>
+    </mat-card>
+    <br>
+</div>
+<app-footer></app-footer>
