@@ -183,7 +183,7 @@ export class CasesCountries implements OnInit {
 
     axios.get('https://covlab-backend-production.up.railway.app/graphData')
       .then( (response) => {
-        for(var i =0;i<response.data[0].length-1;i++){
+        for(var i =0;i<response.data[1].length-1;i++){
            //daily
           casesDaily.push([response.data[0][i].date,response.data[0][i].new_cases])
           tweetDaily.push([response.data[1][i].date,response.data[1][i].new_tweets])
